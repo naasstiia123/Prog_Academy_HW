@@ -59,12 +59,15 @@ def check(email: str):
 if not isinstance(email, str):
         raise TypeError
     patterns = (r'^[^\W\s_]+', r'\w+', r'_*', r'-?', r'@\w+(\.\w+)+$')
-    pattern_5 = r'[^\w\s@.-]'
+    pattern_1 = r'[^\w\s@.-]'
+    pattern_2 = r'@+[\w\W]+@+'
     for item in patterns:
         check_1 = re.search(item, email)
         if not check_1:
             return False
-    if check_5:
+    check_1 = re.search(pattern_1, email)
+    check_2 = re.search(pattern_2, email)
+    if check_1 or check_2:
         return False
 
     return True
