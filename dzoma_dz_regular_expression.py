@@ -7,16 +7,16 @@ def check(data: str, pattern):
     Check if string match with RE
     :param data: String which will check
     :param pattern: RE with which will compare
-    :return: Boolean meaning of checking
+    :return: Match list
     '''
 
     if not isinstance(data, str):
         raise TypeError
-    res = re.search(pattern, data)
-    return bool(res)
+    res = re.findall(pattern, data)
+    return res
 
-pattern_example = r'[Rr][Bb]+[Rr]$'
-a = check('Hello world rBBr', pattern_example)
+pattern_example = r'R[Bb]+[Rr]'
+a = check('Hello RbbR world RBBr', pattern_example)
 print(a)
 
 
@@ -33,7 +33,7 @@ def check(number: str | int):
         number = str(number)
     if not isinstance(number, str):
         raise TypeError
-    pattern = r'^\d{4}-?\d{4}-?\d{4}-?\d{4}$'
+    pattern = r'^\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}$'
     res = re.match(pattern, number)
     return bool(res)
 
